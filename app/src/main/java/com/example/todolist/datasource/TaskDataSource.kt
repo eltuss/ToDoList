@@ -1,6 +1,8 @@
 package com.example.todolist.datasource
 
+
 import com.example.todolist.model.Task
+
 
 object TaskDataSource{
     private val list = arrayListOf<Task>()
@@ -16,7 +18,9 @@ object TaskDataSource{
         }
     }
 
+
     fun findById(taskId: Int) = list.find { it.id == taskId }
     fun deleteTask(task: Task) { list.remove(task) }
+
 
 }

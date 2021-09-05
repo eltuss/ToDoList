@@ -3,27 +3,26 @@
     package="com.example.todolist">
 
     <application
+        android:name=".application.TarefaApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icone"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icone"
         android:supportsRtl="true"
-
-        android:name=".application.ContatoApplication"
-
         android:theme="@style/Theme.ToDoList">
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".ui.AddTaskActivity">
+        <activity android:name=".ui.MainActivity">
 
         </activity>
-
+        <activity android:name=".ui.AddTaskActivity"/>
+        <service android:name="com.example.todolist.ui.TarefaIntentService"
+                 android:exported="false"/>
     </application>
 
 </manifest>

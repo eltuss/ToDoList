@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">To do list</string>
+    <string name="app_name">Lembretes</string>
     <string name="tarefas">Tarefas</string>
     <string name="t_tulo">Título</string>
     <string name="data">Data</string>
@@ -11,4 +11,6 @@
     <string name="label_edit">Editar</string>
     <string name="label_delete">Deletar</string>
     <string name="label_you_dont_have_tasks">Nenhuma tarefa</string>
+    <string name="lembretes">Lembretes</string>
+    <string name="zero">0</string>
 </resources>

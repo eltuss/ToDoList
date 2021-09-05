@@ -25,12 +25,13 @@ class TaskListAdapter : ListAdapter<Task, TaskListAdapter.TaskViewHolder>(DiffCa
         holder.bind(getItem(position))
     }
 
+
     inner class TaskViewHolder(
         private val binding: ItemTaskBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Task) {
             binding.tvTitle.text = item.title
-            binding.tvDate.text = "${item.date} ${item.hour}"
+            binding.tvDate.text = "Data: ${item.date}    Hora: ${item.hour}"
             binding.ivMore.setOnClickListener {
                 showPopup(item)
             }

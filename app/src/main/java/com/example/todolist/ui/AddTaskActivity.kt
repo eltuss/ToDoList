@@ -1,19 +1,25 @@
 package com.example.todolist.ui
 
 import android.app.Activity
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todolist.databinding.ActivityAddTaskBinding
 import com.example.todolist.datasource.TaskDataSource
 import com.example.todolist.extensions.format
 import com.example.todolist.extensions.text
+import com.example.todolist.helpers.HelperDB
 import com.example.todolist.model.Task
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import java.util.*
 
+@RequiresApi(Build.VERSION_CODES.P)
 class AddTaskActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAddTaskBinding
@@ -23,6 +29,7 @@ class AddTaskActivity : AppCompatActivity() {
 
         binding = ActivityAddTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         if (intent.hasExtra(TASK_ID)){
             val taskId = intent.getIntExtra(TASK_ID, 0)
@@ -35,6 +42,7 @@ class AddTaskActivity : AppCompatActivity() {
 
         insertListeners()
     }
+
 
     private fun insertListeners() {
         binding.tilDate.editText?.setOnClickListener {
@@ -64,6 +72,7 @@ class AddTaskActivity : AppCompatActivity() {
         }
 
         binding.btnCancel.setOnClickListener {
+            saveData()
             finish()
         }
 
@@ -74,18 +83,30 @@ class AddTaskActivity : AppCompatActivity() {
                 hour = binding.tilHour.text,
                 id = intent.getIntExtra(TASK_ID, 0)
             )
-
             TaskDataSource.insertTask(addtask)
             setResult(Activity.RESULT_OK)
+            saveData()
             finish()
 
-            Log.e("TAG", "Task : - ${binding.tilTitle.text}" )
 
         }
     }
+    //Salva a lista no sharedpreferences
+    fun saveData() {
+        val insert = TaskDataSource.getList()
+
+        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.apply{
+            putString("STRING_KEY", insert.toString())
+        }.apply()
+
+    }
+
 
     companion object{
         const val TASK_ID = "task_id"
+
     }
 
 }
